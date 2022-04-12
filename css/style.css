@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+
+.wrapper{
+   padding-top:232px;
+   font-family: 'Roboto';
+}
+
+
+.content{
+   border-radius: 10px;
+   border: 1px solid #C4C4C4;
+   max-width: 366px;
+   margin: 0 auto;
+}
+.strip{
+   background-color: #FFDC40;
+   height: 28px;
+   border-radius: 10px 10px 0px 0px;
+
+}
+.container{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+}
+h1{
+   font-size: 26px;
+   font-weight: 900;
+   line-height: 30px;
+}
+.form{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+.input-text{
+   border: 1px solid #C4C4C4;
+   box-sizing: border-box;
+   border-radius: 10px;
+   height: 40px;
+   min-width: 286px;
+   font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+}
+.list{
+      display: none;
+      border: 1px solid #C4C4C4;
+      box-sizing: border-box;
+      border-radius: 10px;
+      width: 286px;
+      margin-top: 20px;
+}
+.button{
+   display: block;
+   margin: 18px 0;
+}
+.button:hover{
+   cursor: pointer;
+}
+
+
+.button-container{
+   width: 150px;
+height: 42px;
+background: #9953F1;
+border-radius: 71px;
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+.button-round{
+   width: 42px;
+height: 42px;
+   background: #AA68FE;
+border-radius: 71px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+color: white;
+}
+.button-text{
+   margin-left: 10px;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+color: white;
+}
+
+.button-sort-list-one{
+   background-image: url('/img/down-black.svg');
+width: 25px;
+height: 15px;
+}
+.button-sort-list-one:hover{
+   background-image: url('/img/down-gray.svg');
+}
+.button-sort-list-two{
+   background-image: url('/img/up-black.svg');
+width: 25px;
+height: 15px;
+display: none;
+}
+.button-sort-list-two:hover{
+   background-image: url('/img/up-gray.svg');
+
+}
+.sort-image{
+   align-self:flex-end;
+   margin:0px 45px 10px 0px;
+   cursor: pointer;
+}
+.delete-button{
+   background-image: url('/img/gray_button.svg');
+margin: 10px;
+height: 20px;
+width: 20px;
+cursor: pointer;
+}
+.delete-button:hover{
+   background-image: url('/img/color_button.svg');
+
+}
+.list__container-el{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+align-items: center;
+}
