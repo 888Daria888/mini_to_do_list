@@ -119,14 +119,20 @@ height: 15px;
 }
 .delete-button{
    background-image: url('/img/gray_button.svg');
-margin: 10px;
+position: relative;
 height: 20px;
 width: 20px;
 cursor: pointer;
+margin: 10px;
 }
 .delete-button:hover{
    background-image: url('/img/color_button.svg');
 
+}
+
+.el-text{
+   max-width: 222px;
+   word-break:break-all;
 }
 .list__container-el{
    display: flex;
@@ -134,8 +140,8 @@ cursor: pointer;
    justify-content: space-between;
 align-items: center;
 margin: 10px;
+cursor: move;
 }
-.el-text{
-   max-width: 222px;
-   word-break: break-all;
+.selected {
+   opacity: 0.6;
 }

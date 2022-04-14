@@ -13,14 +13,21 @@ let formList = document.querySelector('.form')
 let arrayList = [] //массив списка задач
 
 // слушатели
-buttonToDo.addEventListener('click', (e) => {clickButtonToDo()});
+buttonToDo.addEventListener('click', (e) => {clickButtonToDo(e)});
+document.addEventListener('keydown', (e)=>{
+   if (e.key == 'Enter'){
+      clickButtonToDo(e)
+   } else{
+      return
+   }
+});
 buttonSort.addEventListener('click', (e) => {clickButtonSort()});
-// document.addEventListener('keydown', (e)=>e.key == enter)
 
 
 
 // функции
-function clickButtonToDo(){
+function clickButtonToDo(e){
+e.preventDefault()
    if (inputToDo.value == " " || inputToDo.value == ""){
    console.log('Error. Not a text');
       return
@@ -31,13 +38,63 @@ function clickButtonToDo(){
       inputToDo.value=''
    }
 }
-//let inputToDo.value = 'rerere';
-//визуал 
 function addTask(newTaskk){
-   //let newTask = inputToDo.value (rererr)
    let newElDivContainer =  document.createElement('div')
    newList.append(newElDivContainer);
    newElDivContainer.classList.add('list__container-el')
+   newElDivContainer.setAttribute('draggable','true')
+   newList.addEventListener(`dragstart`, (e) => {
+      e.target.classList.add(`selected`);
+   });
+   newList.addEventListener(`dragend`, (e) => {
+      e.target.classList.remove(`selected`);
+   });
+
+   newList.addEventListener(`dragover`, (e) => {
+      e.preventDefault();
+      const activeElement = newList.querySelector(`.selected`);
+      const currentElement = e.target;
+      const isMoveable = activeElement !== currentElement &&
+      currentElement.classList.contains(`list__container-el`);
+      if (!isMoveable) {
+         return;
+      }
+      const nextElement = (currentElement === activeElement.nextElementSibling) 
+      ? currentElement.nextElementSibling 
+      : currentElement;
+      newList.insertBefore(activeElement, nextElement);
+   });
+
+   const getNextElement = (cursorPosition, currentElement) => {
+      const currentElementCoord = currentElement.getBoundingClientRect();
+      const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
+      const nextElement = (cursorPosition < currentElementCenter)
+      ? currentElement 
+      : currentElement.nextElementSibling;
+      return nextElement;
+   };
+
+   newList.addEventListener(`dragover`, (e) => {
+      e.preventDefault();
+      const activeElement = newList.querySelector(`.selected`);
+      const currentElement = e.target;
+      const isMoveable = activeElement !== currentElement &&
+      currentElement.classList.contains(`list__container-el`);
+      if (!isMoveable) {
+      return;
+      }
+      const nextElement = getNextElement(e.clientY, currentElement);
+      if (
+      nextElement && 
+      activeElement === nextElement.previousElementSibling ||
+      activeElement === nextElement
+      ) {
+         return;
+      }
+      newList.insertBefore(activeElement, nextElement);
+   });
+
+
    let newElDiv =  document.createElement('div')
    newElDiv.innerText= newTaskk;
    newElDivContainer.append(newElDiv);
@@ -72,13 +129,12 @@ function clickButtonSort(){
    } else {
       let listToSort = document.querySelectorAll('.list__container-el')
       arrayList.sort(compareList);
-      console.log(arrayList);
-      console.log(listToSort);
       
       listToSort.forEach((el, i , arr)=> {
          arr[i].innerHTML = '';
-         arr[i].innerHTML= arrayList[i];
-         arr[i].innerHTML.classList
+         arr[i].innerHTML= `<div class = "el-text">${arrayList[i]}</div>`
+         console.log(arr[i]);
+         
          let deleteButton = createDeleteButton(); 
          el.append(deleteButton);
       })
