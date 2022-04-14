@@ -5,7 +5,7 @@ let buttonToDo = document.querySelector('.button')
 let inputToDo = document.querySelector('.input-text')
 let newList =  document.querySelector('.list')
 //
-let buttonSort = document.querySelector('.sort-image')
+let buttonSort = document.querySelector('.button-sort-list-one')
 
 
 let formList = document.querySelector('.form')
@@ -42,17 +42,15 @@ function addTask(newTaskk){
    newElDiv.innerText= newTaskk;
    newElDivContainer.append(newElDiv);
    newElDiv.classList.add('el-text')
-   newElDiv.style.margin = '10px'
-   newElDiv.style.maxWidth = '222px'
-   newElDiv.style.wordBreak = "break-all"
-   creartDeleteButton(newElDivContainer)   
+   let deleteButton = createDeleteButton()  
+   newElDivContainer.append(deleteButton);
 }
 
-function creartDeleteButton(newElDivContainer){
+function createDeleteButton(){
    let deleteButton = document.createElement('div')
    deleteButton.classList.add('delete-button')
-   newElDivContainer.append(deleteButton);
    deleteButton.addEventListener('click', clickDleletButton)
+   return deleteButton
 }
 
 
@@ -71,38 +69,36 @@ function clickDleletButton(){
 function clickButtonSort(){
    if (newList.innerText == ''){
       return
-   } else{
-      let buttonSortChild = buttonSort.children
-      let listOne = document.querySelector('.button-sort-list-one')
-      let listTwo = document.querySelector('.button-sort-list-two')
-      console.log(buttonSortChild);
+   } else {
+      let listToSort = document.querySelectorAll('.list__container-el')
+      arrayList.sort(compareList);
+      console.log(arrayList);
+      console.log(listToSort);
       
-      buttonSortChild.classList = buttonSortChild.classList == listOne ? listTwo : listOne
-      if(buttonSortChild.classList == listOne){
-         listTwo.style.display ='none'
-         listOne.style.display = 'block'
+      listToSort.forEach((el, i , arr)=> {
+         arr[i].innerHTML = '';
+         arr[i].innerHTML= arrayList[i];
+         arr[i].innerHTML.classList
+         let deleteButton = createDeleteButton(); 
+         el.append(deleteButton);
+      })
+      buttonSort.classList = buttonSort.classList == 'button-sort-list-one' 
+      ? 'button-sort-list-two' 
+      : 'button-sort-list-one'
       }
-      if (buttonSortChild.classList == listTwo){
-         listTwo.style.display ='block'
-         listOne.style.display = 'none'
-         // arrayList.sort()
-         // compareList(arrayList)
-      }
-      // console.log(arrayList);
-      
    }
-}
-   
-// listToSort.forEach((el, i , arr)=> {
-//    arr[i]=""
-//    arr[i]= arrayToDo[i];
-//    let deleteButton = creartDeleteButton();
-//    el.append(deleteButton)
-// })
-// }
 
-// function compareList(a,b){
-//    if(a>b) return 1;
-//    if(a=b) return 0;
-//    if(a<b) return -1;
-// }
+function compareList(a,b){
+   return buttonSort.classList == "button-sort-list-one"
+   ? a < b
+   ? -1
+   : a > b
+   ? 1
+   : 0
+
+   : a < b
+   ? 1
+   : a > b
+   ? -1
+   : 0;
+}
